@@ -6,7 +6,7 @@
 //====================================================================================================//
 
 // Initializations:
-const discord = require('./discord.js');
+const discord = require('discord.js');
 const client = new discord.Client();
 const mysql = require('mysql');
 const key = 'cookie';
