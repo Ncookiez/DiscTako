@@ -6,7 +6,7 @@
 //====================================================================================================//
 
 // Initializations:
-const discord = require('discord.js');
+const discord = require('./discord.js');
 const client = new discord.Client();
 const mysql = require('mysql');
 const key = 'cookie';
@@ -19,7 +19,7 @@ const db_name = 'ncookie_ClaimsDB';
 var con = mysql.createConnection({
     host: db_host,
     user: db_user,
-    password: process.env.DB_PASS,
+    password: process.env.COOKIEBOT_PASS,
     database: db_name
 });
 con.connect(function(err) {
@@ -372,4 +372,4 @@ client.on('message', message => {
 //====================================================================================================//
 
 // Accessing Bot w/ Token:
-client.login(process.env.BOT_TOKEN);
+client.login(process.env.COOKIEBOT_TOKEN);

@@ -6,7 +6,7 @@
 //====================================================================================================//
 
 // Initializations:
-const discord = require('discord.js');
+const discord = require('./discord.js');
 const client = new discord.Client();
 const mysql = require('mysql');
 const key = '!';
@@ -18,7 +18,7 @@ const db_name = 'ncookie_KindaSusDB';
 var con = mysql.createConnection({
     host: db_host,
     user: db_user,
-    password: process.env.DB_PASS,
+    password: process.env.KINDASUSBOT_PASS,
     database: db_name
 });
 con.connect(function(err) {
@@ -156,4 +156,4 @@ client.on('message', message => {
 //====================================================================================================//
 
 // Accessing Bot w/ Token:
-client.login(process.env.BOT_TOKEN);
+client.login(process.env.KINDASUSBOT_TOKEN);

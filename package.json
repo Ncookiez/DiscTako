@@ -1,0 +1,22 @@
+{
+  "name": "disctako",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ncookiez/DiscTako.git"
+  },
+  "author": "Ncookie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ncookiez/DiscTako/issues"
+  },
+  "homepage": "https://github.com/Ncookiez/DiscTako#readme",
+  "dependencies": {
+    "discord.js": "^12.3.1"
+  }
+}
