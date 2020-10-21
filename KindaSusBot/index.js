@@ -50,11 +50,10 @@ client.on('message', message => {
                 sql = "INSERT INTO players (discordID, username) VALUES ('" + discordID + "', '" + username + "')";
                 con.query(sql, function(err) {
                     if(err) throw err;
-                    var sql = "SELECT * FROM players";
+                    var sql = "SELECT * FROM players";  
                     con.query(sql, function(err, result) {
                         if(err) throw err;
                         var crewSize = result.length;
-                        console.log('A player joined! Current Crew Size: ' + crewSize);
                         if(crewSize == 10) {
                             message.channel.send(':rocket: Our spaceship is full and ready to launch! :rocket:');
                         } else if(crewSize == 6) {
@@ -85,7 +84,7 @@ client.on('message', message => {
         con.query(sql, function(err, result) {
             if(err) throw err;
             if(result.length) {
-                var crewmates = ':rocket: Current "crewmates" aboard:\n';
+                var crewmates = ':rocket: Current "crewmates" aboard (' + result.length + '):\n';
                 for(var i = 0; i < result.length; i++) {
                     crewmates += '> ' + result[i].username + '\n';
                 }
@@ -143,6 +142,13 @@ client.on('message', message => {
         crew();
         return;
     }
+
+    // Command: '!kick':
+    // if(command === 'kick') {
+    //     crew();
+    //     return;
+    // }
+    // <TODO>
 
     // Command: '!reset':
     if(command === 'reset') {
