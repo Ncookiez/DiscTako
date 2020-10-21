@@ -113,6 +113,7 @@ client.on('message', message => {
     // Command: '!join':
     if(command === 'join') {
         var crewSize = join(message.author.id, message.author.username);
+        console.log('Current Crew Size: ' + crewSize);
         if(crewSize == 10) {
             message.channel.send(':rocket: Our spaceship is full and ready to launch! :rocket:');
         } else if(crewSize == 6) {
