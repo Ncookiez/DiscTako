@@ -48,7 +48,7 @@ client.once('ready', () => {
                         }
                     });
                     client.users.cache.get(result[i].userID).send(':cookie: Your claim to ' + result[i].claim + ' has expired. It can now be claimed by others.');
-                    console.log('----- CLAIMS: Claim ' + result[i].claim + ' @ ' + result[i].time.slice(0, 15) + 'from ' + result[i].username + ' has been invalidated.');
+                    console.log('----- CLAIMS: Claim ' + result[i].claim + ' @ ' + result[i].time + 'from ' + result[i].username + ' has been invalidated.');
                 }
             } else {
                 console.log('----- CLAIMS: No claims invalidated during startup.');
@@ -150,7 +150,7 @@ client.on('message', message => {
                 var claims = '';
                 client.users.cache.get('130396053399797760').send(':cookie: All Claims:');
                 for(var i = 0; i < result.length; i++) {
-                    claims += '> ' + result[i].username + ' has claimed ' + result[i].claim + ' on ' + result[i].time.slice(0, 15) + '.\n';
+                    claims += '> ' + result[i].username + ' has claimed ' + result[i].claim + ' on ' + result[i].time + '.\n';
                     if(claims.length > 1500) {
                         client.users.cache.get('130396053399797760').send(claims);
                         claims = '';
