@@ -40,7 +40,6 @@ client.on('message', message => {
 
     // MySQL query to add to database:
     function join(discordID, username) {
-        var crewSize;
         var sql = "SELECT discordID FROM players WHERE discordID = '" + discordID + "'";
         con.query(sql, function(err, result) {
             if(err) throw err;
@@ -54,7 +53,13 @@ client.on('message', message => {
                     var sql = "SELECT * FROM players";
                     con.query(sql, function(err, result) {
                         if(err) throw err;
-                        crewSize = result.length;
+                        var crewSize = result.length;
+                        console.log('A player joined! Current Crew Size: ' + crewSize);
+                        if(crewSize == 10) {
+                            message.channel.send(':rocket: Our spaceship is full and ready to launch! :rocket:');
+                        } else if(crewSize == 6) {
+                            message.channel.send(':rocket: @everyone There are at least 6 "crewmates" ready to launch. Anyone else wanting to join? :rocket:');
+                        }
                     });
                 });
             }
@@ -112,13 +117,7 @@ client.on('message', message => {
 
     // Command: '!join':
     if(command === 'join') {
-        var crewSize = join(message.author.id, message.author.username);
-        console.log('Current Crew Size: ' + crewSize);
-        if(crewSize == 10) {
-            message.channel.send(':rocket: Our spaceship is full and ready to launch! :rocket:');
-        } else if(crewSize == 6) {
-            message.channel.send(':rocket: @everyone There are at least 6 "crewmates" ready to launch. Anyone else wanting to join? :rocket:');
-        }
+        join(message.author.id, message.author.username);
         return;
     }
 
