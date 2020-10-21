@@ -64,7 +64,6 @@ client.on('message', message => {
                 });
             }
         });
-        return crewSize;
     }
 
     // MySQL query to delete from database:
