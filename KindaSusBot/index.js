@@ -15,10 +15,11 @@ const db_user = 'ncookie_ncookie';
 const db_name = 'ncookie_KindaSusDB';
 
 // MySQL Connection Setup:
+var con;
 function dbConnect() {
 
     // Creating Connection:
-    var con = mysql.createConnection({
+    con = mysql.createConnection({
         host: db_host,
         user: db_user,
         password: process.env.KINDASUSBOT_PASS,
@@ -32,7 +33,7 @@ function dbConnect() {
     });
     
     // Handling Idle Timeouts:
-    connection.on('error', function(err) {
+    con.on('error', function(err) {
         if(err.code === 'PROTOCOL_CONNECTION_LOST') {
             console.log('MySQL connection dropped. Attempting to reconnect...');
             dbConnect();
