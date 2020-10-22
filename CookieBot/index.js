@@ -15,17 +15,34 @@ const db_host = '65.19.141.67';
 const db_user = 'ncookie_ncookie';
 const db_name = 'ncookie_ClaimsDB';
 
-// Connecting to MySQL:
-var con = mysql.createConnection({
-    host: db_host,
-    user: db_user,
-    password: process.env.COOKIEBOT_PASS,
-    database: db_name
-});
-con.connect(function(err) {
-    if(err) throw err;
-    console.log('MySQL has been connected to with plenty of cookies to spare.');
-});
+// MySQL Connection Setup:
+function dbConnect() {
+
+    // Creating Connection:
+    var con = mysql.createConnection({
+        host: db_host,
+        user: db_user,
+        password: process.env.COOKIEBOT_PASS,
+        database: db_name
+    });
+    
+    // Connecting:
+    con.connect(function(err) {
+        if(err) throw err;
+        console.log('MySQL has been connected to with plenty of cookies to spare.');
+    });
+    
+    // Handling Idle Timeouts:
+    connection.on('error', function(err) {
+        if(err.code === 'PROTOCOL_CONNECTION_LOST') {
+            console.log('MySQL connection dropped. Attempting to reconnect...');
+            dbConnect();
+        } else {
+            throw err;
+        }
+    });
+}
+dbConnect();
 
 // Startup Message:
 client.once('ready', () => {
