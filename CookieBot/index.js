@@ -14,10 +14,11 @@ const prefix = 'cookie ';
 const db_host = '65.19.141.67';
 const db_user = 'ncookie_ncookie';
 const db_name = 'ncookie_ClaimsDB';
+var con;
+var claimsChecked = false;
 
 // MySQL Connection Setup:
-var con;
-function dbConnect() {
+function dbConnect(callback) {
 
     // Creating Connection:
     var con = mysql.createConnection({
@@ -42,12 +43,18 @@ function dbConnect() {
             throw err;
         }
     });
+
+    // Checking for elapsed claims on startup (runs at least once a day):
+    if(!claimsChecked) {
+        claimsChecked = true;
+        callback();
+    }
 }
 
 // Startup Message:
 client.once('ready', () => {
     console.log('CookieBot is ready to deliver the goods.');
-    dbConnect();
+    dbConnect(checkClaims);
 
     // MySQL query to check and delete elapsed claims:
     function checkClaims() {
@@ -73,9 +80,6 @@ client.once('ready', () => {
             }
         });
     }
-
-    // Checking for elapsed claims on startup (runs at least once a day):
-    setTimeout(checkClaims(), 5000);
 
 });
 
