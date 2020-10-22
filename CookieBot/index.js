@@ -21,7 +21,7 @@ var claimsChecked = false;
 function dbConnect(callback) {
 
     // Creating Connection:
-    var con = mysql.createConnection({
+    con = mysql.createConnection({
         host: db_host,
         user: db_user,
         password: process.env.COOKIEBOT_PASS,
@@ -32,12 +32,6 @@ function dbConnect(callback) {
     con.connect(function(err) {
         if(err) throw err;
         console.log('MySQL has been connected to with plenty of cookies to spare.');
-
-        // Checking for elapsed claims on startup (runs at least once a day):
-        if(!claimsChecked) {
-            claimsChecked = true;
-            callback();
-        }
     });
     
     // Handling Idle Timeouts:
@@ -49,6 +43,12 @@ function dbConnect(callback) {
             throw err;
         }
     });
+
+    // Checking for elapsed claims on startup (runs at least once a day):
+    if(!claimsChecked) {
+        claimsChecked = true;
+        callback();
+    }
 
 }
 
