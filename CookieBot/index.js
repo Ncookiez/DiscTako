@@ -43,11 +43,11 @@ function dbConnect() {
         }
     });
 }
-dbConnect();
 
 // Startup Message:
 client.once('ready', () => {
     console.log('CookieBot is ready to deliver the goods.');
+    dbConnect();
 
     // MySQL query to check and delete elapsed claims:
     function checkClaims() {
