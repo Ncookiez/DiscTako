@@ -75,7 +75,7 @@ client.once('ready', () => {
     }
 
     // Checking for elapsed claims on startup (runs at least once a day):
-    checkClaims();
+    setTimeout(checkClaims(), 2000);
 
 });
 
