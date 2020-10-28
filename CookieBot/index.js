@@ -18,7 +18,7 @@ var con;
 var claimsChecked = false;
 
 // MySQL Connection Setup:
-function dbConnect(callback) {
+function dbConnect() {
 
     // Creating Connection:
     con = mysql.createConnection({
@@ -44,18 +44,13 @@ function dbConnect(callback) {
         }
     });
 
-    // Checking for elapsed claims on startup (runs at least once a day):
-    if(!claimsChecked) {
-        claimsChecked = true;
-        callback();
-    }
-
 }
 
 // Startup Message:
 client.once('ready', () => {
     console.log('CookieBot is ready to deliver the goods.');
-    dbConnect(checkClaims);
+    dbConnect();
+    checkClaims();
 
     // MySQL query to check and delete elapsed claims:
     function checkClaims() {
